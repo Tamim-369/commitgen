@@ -83,12 +83,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-800">
+    <div className="min-h-screen bg-black text-white">
       {/* Notification */}
       {notification && (
         <div className={`fixed top-4 right-4 z-50 px-4 py-2 rounded-lg shadow-lg transform transition-all duration-300 ${notification.includes('Failed') || notification.includes('error')
-          ? 'bg-red-500/90 text-white'
-          : 'bg-green-500/90 text-white'
+          ? 'bg-red-600 text-white border border-red-500'
+          : 'bg-green-600 text-white border border-green-500'
           }`}>
           <div className="flex items-center gap-2">
             {notification.includes('Failed') ?
@@ -105,42 +105,41 @@ export default function Home() {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="relative">
-              <GitBranch className="w-8 h-8 text-purple-400" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+              <img src="/logo.svg" className='h-20 invert-100' alt="" />
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold text-white">
               CommitGen
             </h1>
           </div>
-          <p className="text-xl text-slate-400 mb-2">AI-powered git commit message generator</p>
-          <p className="text-sm text-slate-500">Turn your diffs into meaningful commit messages</p>
+          <p className="text-xl text-gray-400 mb-2">AI-powered git commit message generator</p>
+          <p className="text-sm text-gray-500">Turn your diffs into meaningful commit messages</p>
         </div>
 
         {/* Instructions Card */}
-        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 mb-8 shadow-xl">
+        <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-8 shadow-2xl">
           <div className="flex items-center gap-3 mb-4">
-            <Terminal className="w-5 h-5 text-blue-400" />
-            <h3 className="text-lg font-semibold text-slate-200">Quick Setup</h3>
+            <Terminal className="w-5 h-5 text-white" />
+            <h3 className="text-lg font-semibold text-white">Quick Setup</h3>
           </div>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-purple-500/20 border border-purple-500/30 rounded-full flex items-center justify-center text-xs font-mono text-purple-400 mt-0.5">1</div>
-                <p className="text-slate-300">Open terminal in your project</p>
+                <div className="w-6 h-6 bg-white text-black rounded-full flex items-center justify-center text-xs font-mono font-bold mt-0.5">1</div>
+                <p className="text-gray-300">Open terminal in your project</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-purple-500/20 border border-purple-500/30 rounded-full flex items-center justify-center text-xs font-mono text-purple-400 mt-0.5">2</div>
-                <p className="text-slate-300">Run <code className="bg-slate-700 px-2 py-1 rounded text-sm text-green-400 font-mono">git diff</code></p>
+                <div className="w-6 h-6 bg-white text-black rounded-full flex items-center justify-center text-xs font-mono font-bold mt-0.5">2</div>
+                <p className="text-gray-300">Run <code className="bg-black px-2 py-1 rounded text-sm text-white font-mono border border-gray-700">git diff</code></p>
               </div>
             </div>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-purple-500/20 border border-purple-500/30 rounded-full flex items-center justify-center text-xs font-mono text-purple-400 mt-0.5">3</div>
-                <p className="text-slate-300">Copy output (Ctrl+A → Ctrl+C)</p>
+                <div className="w-6 h-6 bg-white text-black rounded-full flex items-center justify-center text-xs font-mono font-bold mt-0.5">3</div>
+                <p className="text-gray-300">Copy output (Ctrl+A → Ctrl+C)</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-purple-500/20 border border-purple-500/30 rounded-full flex items-center justify-center text-xs font-mono text-purple-400 mt-0.5">4</div>
-                <p className="text-slate-300">Paste below and generate!</p>
+                <div className="w-6 h-6 bg-white text-black rounded-full flex items-center justify-center text-xs font-mono font-bold mt-0.5">4</div>
+                <p className="text-gray-300">Paste below and generate!</p>
               </div>
             </div>
           </div>
@@ -150,7 +149,7 @@ export default function Home() {
         <div className="space-y-8">
           {/* Diff Input */}
           <div className="group">
-            <label className="block text-sm font-medium text-slate-300 mb-3">
+            <label className="block text-sm font-medium text-gray-300 mb-3">
               Git Diff Input
             </label>
             <div className="relative">
@@ -169,13 +168,13 @@ index 1234567..abcdefg 100644
 +  console.log('Hello World');
    return <div>App</div>;
  }"
-                className="w-full h-48 p-4 bg-slate-800/50 backdrop-blur-sm border border-slate-600/50 rounded-xl 
-                         font-mono text-sm text-slate-200 placeholder-slate-500 
-                         focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 focus:outline-none
+                className="w-full h-48 p-4 bg-gray-900 border border-gray-700 rounded-xl 
+                         font-mono text-sm text-white placeholder-gray-500 
+                         focus:border-white focus:ring-2 focus:ring-white/20 focus:outline-none
                          transition-all duration-200 resize-none
-                         group-hover:border-slate-500/70"
+                         group-hover:border-gray-500"
               />
-              <div className="absolute bottom-3 right-3 text-xs text-slate-500 font-mono">
+              <div className="absolute bottom-3 right-3 text-xs text-gray-500 font-mono">
                 {diff.length} chars
               </div>
             </div>
@@ -186,17 +185,17 @@ index 1234567..abcdefg 100644
             <button
               onClick={generateCommit}
               disabled={loading || !diff.trim()}
-              className="group relative px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 
-                       hover:from-purple-500 hover:to-pink-500 disabled:from-slate-600 disabled:to-slate-600
-                       text-white font-semibold rounded-xl shadow-lg
-                       disabled:opacity-50 disabled:cursor-not-allowed
+              className="group relative px-8 py-3 bg-white text-black 
+                       hover:bg-gray-200 disabled:bg-gray-600 disabled:text-gray-400
+                       font-semibold rounded-xl shadow-lg border-2 border-white
+                       disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-600
                        transform transition-all duration-200 hover:scale-105 active:scale-95
-                       focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                       focus:outline-none focus:ring-2 focus:ring-white/50"
             >
               <div className="flex items-center gap-3">
                 {loading ? (
                   <>
-                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <div className="w-4 h-4 border-2 border-gray-400 border-t-black rounded-full animate-spin"></div>
                     Generating...
                   </>
                 ) : (
@@ -211,31 +210,31 @@ index 1234567..abcdefg 100644
 
           {/* Generated Commit */}
           {commit && (
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 shadow-xl 
+            <div className="bg-gray-900 border border-gray-700 rounded-xl p-6 shadow-2xl 
                           animate-in fade-in slide-in-from-bottom-4 duration-500">
               <div className="flex items-center gap-3 mb-4">
-                <GitBranch className="w-5 h-5 text-green-400" />
-                <h2 className="text-xl font-semibold text-slate-200">Generated Commit Message</h2>
+                <GitBranch className="w-5 h-5 text-white" />
+                <h2 className="text-xl font-semibold text-white">Generated Commit Message</h2>
               </div>
 
-              <div className="bg-slate-900/70 border border-slate-600/30 rounded-lg p-4 mb-4">
-                <p className="font-mono text-green-400 text-lg leading-relaxed">{commit}</p>
+              <div className="bg-black border border-gray-600 rounded-lg p-4 mb-4">
+                <p className="font-mono text-white text-lg leading-relaxed">{commit}</p>
               </div>
 
               <div className="flex items-center gap-3">
                 <button
                   onClick={copyToClipboard}
-                  className="group flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-500 
-                           text-white font-medium rounded-lg shadow-md
+                  className="group flex items-center gap-2 px-4 py-2 bg-white text-black 
+                           hover:bg-gray-200 font-medium rounded-lg shadow-md border-2 border-white
                            transform transition-all duration-200 hover:scale-105 active:scale-95
-                           focus:outline-none focus:ring-2 focus:ring-green-500/50"
+                           focus:outline-none focus:ring-2 focus:ring-white/50"
                 >
-                  <Copy className={`w-4 h-4 transition-all duration-200 ${copied ? 'text-green-200' : 'group-hover:scale-110'}`} />
+                  <Copy className={`w-4 h-4 transition-all duration-200 ${copied ? 'text-gray-600' : 'group-hover:scale-110'}`} />
                   {copied ? 'Copied!' : 'Copy to Clipboard'}
                 </button>
 
-                <div className="text-sm text-slate-400">
-                  Ready to commit? Run: <code className="bg-slate-700 px-2 py-1 rounded text-green-400 font-mono">git commit -m "..."</code>
+                <div className="text-sm text-gray-400">
+                  Ready to commit? Run: <code className="bg-black px-2 py-1 rounded text-white font-mono border border-gray-700">git commit -m "..."</code>
                 </div>
               </div>
             </div>
@@ -243,7 +242,7 @@ index 1234567..abcdefg 100644
         </div>
 
         {/* Footer */}
-        <div className="mt-16 text-center text-slate-500 text-sm">
+        <div className="mt-16 text-center text-gray-500 text-sm">
           <p>Made with ❤️ for developers who care about clean commit history</p>
         </div>
       </div>
