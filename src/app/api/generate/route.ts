@@ -4,6 +4,11 @@ import tokenizer from "gpt-tokenizer";
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
+// Define request body type
+interface GenerateRequestBody {
+  diff: string;
+}
+
 // Split text into chunks of maxTokens
 function splitIntoChunks(text: string, maxTokens: number): string[] {
   const tokens = tokenizer.encode(text);
@@ -83,9 +88,18 @@ FINAL COMMIT MESSAGE:
 }
 
 export async function POST(request: NextRequest) {
-  const { diff } = await request.json();
-
   try {
+    const body: GenerateRequestBody = await request.json();
+    const { diff } = body;
+
+    // Validate the diff input
+    if (!diff || typeof diff !== "string") {
+      return NextResponse.json(
+        { message: "Invalid diff provided" },
+        { status: 400 }
+      );
+    }
+
     // Trim huge diffs (optional safety)
     const safeDiff = diff.length > 100000 ? diff.slice(-100000) : diff;
 
@@ -106,14 +120,22 @@ export async function POST(request: NextRequest) {
     console.log("Final commit:", finalCommit);
 
     return NextResponse.json({ message: finalCommit });
-  } catch (error: any) {
-    console.error("Groq error:", error.message);
-    if (error.status === 413) {
-      return NextResponse.json(
-        { message: "Diff too large. Try a smaller change." },
-        { status: 400 }
-      );
+  } catch (error) {
+    console.error("Groq error:", error);
+
+    // Type-safe error handling
+    if (error instanceof Error) {
+      // Check for specific Groq API errors
+      if ("status" in error && error.status === 413) {
+        return NextResponse.json(
+          { message: "Diff too large. Try a smaller change." },
+          { status: 400 }
+        );
+      }
+
+      console.error("Error message:", error.message);
     }
+
     return NextResponse.json(
       { message: "AI is tired. Try again in 10 sec." },
       { status: 500 }
