@@ -234,7 +234,7 @@ index 1234567..abcdefg 100644
                 </button>
 
                 <div className="text-sm text-gray-400">
-                  Ready to commit? Run: <code className="bg-black px-2 py-1 rounded text-white font-mono border border-gray-700">git commit -m "..."</code>
+                  Ready to commit? Run: <code className="bg-black px-2 py-1 rounded text-white font-mono border border-gray-700">git commit -m &quot;...&quot;</code>
                 </div>
               </div>
             </div>
